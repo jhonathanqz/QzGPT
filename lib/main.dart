@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
-
-import 'package:qz_gpt/src/pages/home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:qz_gpt/app/app_module.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const App(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Modular.setInitialRoute('/home/');
+    return MaterialApp.router(
       title: 'Qz GPT',
+      theme: materialThemeData,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: HomePage(),
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
+
+  static ThemeData get materialThemeData => ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue.shade900,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
 }
