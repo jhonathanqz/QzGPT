@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chat_gpt_flutter/chat_gpt_flutter.dart';
 import 'package:mobx/mobx.dart';
+
 import 'package:qz_gpt/src/models/chat_model.dart';
 
 part 'chat_controller.g.dart';
@@ -11,6 +12,18 @@ class ChatController = _ChatControllerBase with _$ChatController;
 abstract class _ChatControllerBase with Store {
   @observable
   bool isLoading = false;
+
+  @observable
+  bool isError = false;
+
+  @observable
+  String errorMessage = '';
+
+  @action
+  void setError(String message) {
+    isError = true;
+    errorMessage = message;
+  }
 
   StreamSubscription? stream;
 

@@ -1,1 +1,3 @@
-const apiKey = String.fromEnvironment('API_KEY');
+class AppToken {
+  static String apiToken = ''.trim();
+}
