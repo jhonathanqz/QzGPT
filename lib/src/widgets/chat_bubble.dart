@@ -17,7 +17,7 @@ class ChatBubble extends StatelessWidget {
     if (chatModel.isSender) {
       return BubbleSpecialThree(
         text: chatModel.text,
-        color: Colors.blue,
+        color: Colors.green,
         tail: false,
         textStyle: const TextStyle(color: Colors.white, fontSize: 16),
         isSender: chatModel.isSender,
@@ -25,7 +25,7 @@ class ChatBubble extends StatelessWidget {
     }
     return BubbleSpecialThree(
       text: chatModel.text,
-      color: Colors.grey,
+      color: Colors.grey.shade300,
       tail: false,
       //textStyle: const TextStyle(color: Colors.white, fontSize: 16),
       isSender: chatModel.isSender,

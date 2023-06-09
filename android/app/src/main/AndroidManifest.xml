@@ -1,7 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.qz_gpt">
-   <application
-        android:label="qz_gpt"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
+    <application
+        android:label="QzGPT"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

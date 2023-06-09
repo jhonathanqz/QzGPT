@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rx_notifier/rx_notifier.dart';
+
 import 'package:qz_gpt/app/app_module.dart';
+import 'package:qz_gpt/app/modules/home/pages/home_page.dart';
+import 'package:qz_gpt/src/reducers/chat_reducer.dart';
 
 void main() {
   runApp(
-    ModularApp(
-      module: AppModule(),
-      child: const App(),
+    RxRoot(
+      child: ModularApp(
+        module: AppModule(),
+        child: const App(),
+      ),
     ),
   );
 }
@@ -16,19 +23,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/home/');
+    Modular.setInitialRoute('/splash/');
+    //reducer;
     return MaterialApp.router(
-      title: 'Qz GPT',
+      title: 'QzGPT',
       theme: materialThemeData,
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
+      //home: const HomePage(),
     );
   }
 
   static ThemeData get materialThemeData => ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.blue.shade900,
+        colorSchemeSeed: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       );
 }

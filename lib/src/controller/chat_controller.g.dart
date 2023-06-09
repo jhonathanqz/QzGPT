@@ -25,6 +25,38 @@ mixin _$ChatController on _ChatControllerBase, Store {
     });
   }
 
+  late final _$isErrorAtom =
+      Atom(name: '_ChatControllerBase.isError', context: context);
+
+  @override
+  bool get isError {
+    _$isErrorAtom.reportRead();
+    return super.isError;
+  }
+
+  @override
+  set isError(bool value) {
+    _$isErrorAtom.reportWrite(value, super.isError, () {
+      super.isError = value;
+    });
+  }
+
+  late final _$errorMessageAtom =
+      Atom(name: '_ChatControllerBase.errorMessage', context: context);
+
+  @override
+  String get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   late final _$chatModelsAtom =
       Atom(name: '_ChatControllerBase.chatModels', context: context);
 
@@ -69,6 +101,17 @@ mixin _$ChatController on _ChatControllerBase, Store {
       ActionController(name: '_ChatControllerBase', context: context);
 
   @override
+  void setError(String message) {
+    final _$actionInfo = _$_ChatControllerBaseActionController.startAction(
+        name: '_ChatControllerBase.setError');
+    try {
+      return super.setError(message);
+    } finally {
+      _$_ChatControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void wipeStore() {
     final _$actionInfo = _$_ChatControllerBaseActionController.startAction(
         name: '_ChatControllerBase.wipeStore');
@@ -83,6 +126,8 @@ mixin _$ChatController on _ChatControllerBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+isError: ${isError},
+errorMessage: ${errorMessage},
 chatModels: ${chatModels},
 isFinishResponse: ${isFinishResponse}
     ''';

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:chat_gpt_flutter/chat_gpt_flutter.dart';
 import 'package:mobx/mobx.dart';
+import 'package:qz_gpt/src/common/constants.dart';
+
 import 'package:qz_gpt/src/models/chat_model.dart';
 
 part 'chat_controller.g.dart';
@@ -11,6 +13,18 @@ class ChatController = _ChatControllerBase with _$ChatController;
 abstract class _ChatControllerBase with Store {
   @observable
   bool isLoading = false;
+
+  @observable
+  bool isError = false;
+
+  @observable
+  String errorMessage = '';
+
+  @action
+  void setError(String message) {
+    isError = true;
+    errorMessage = message;
+  }
 
   StreamSubscription? stream;
 
@@ -23,8 +37,7 @@ abstract class _ChatControllerBase with Store {
   @action
   Future<void> sendMessage(String message) async {
     try {
-      final chatGPT = ChatGpt(
-          apiKey: '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');
+      final chatGPT = ChatGpt(apiKey: AppToken.apiToken);
       isLoading = true;
 
       chatModels.insert(0, ChatModel(text: message, isSender: true));
